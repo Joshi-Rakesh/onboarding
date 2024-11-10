@@ -2,21 +2,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PersonalProfile {
   name: string;
-  age: number;
+  age: string;
   email: string;
   profilePicture: string;
 }
 
 interface OnboardingState {
-  step: number;
   personalProfile: PersonalProfile;
   favoriteSongs: string[];
   paymentInfo: { cardNumber: string; expiryDate: string; cvv: string };
 }
 
 const initialState: OnboardingState = {
-  step: 1,
-  personalProfile: { name: "", age: 0, email: "", profilePicture: "" },
+  personalProfile: { name: "", age: "", email: "", profilePicture: "" },
   favoriteSongs: [],
   paymentInfo: { cardNumber: "", expiryDate: "", cvv: "" },
 };
@@ -25,8 +23,8 @@ const onboardingSlice = createSlice({
   name: "onboarding",
   initialState,
   reducers: {
-    setStep(state, action: PayloadAction<number>) {
-      state.step = action.payload;
+    setStep(_, action: PayloadAction<number>) {
+      localStorage.setItem("onboarding-step", action.payload.toString());
     },
 
     savePersonalProfile(state, action: PayloadAction<PersonalProfile>) {

@@ -13,12 +13,12 @@ const Step1PersonalProfile = () => {
 
   return (
     <Formik
-      initialValues={{ name: "", age: 0, email: "", profilePicture: "" }}
+      initialValues={{ name: "", age: "", email: "", profilePicture: "" }}
       onSubmit={(values) => {
         console.log(values, "lknksd");
         dispatch(savePersonalProfile(values));
         dispatch(setStep(2));
-        navigate("/onboarding");
+        navigate("/onboarding/step2");
       }}
     >
       {() => (

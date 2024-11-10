@@ -1,19 +1,33 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField, Box, Typography } from "@mui/material";
+import { setStep } from "../redux/slices/onboardingSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
     if (username && password) {
-      localStorage.setItem("onboarding-step", "1");
-      navigate("/onboarding");
+      if (localStorage.getItem("userName") === username) {
+        if (localStorage.getItem("onboarding-completed")) {
+          navigate("/home");
+        } else if (localStorage.getItem("onboarding-step")) {
+          navigate(
+            `/onboarding/step${localStorage.getItem("onboarding-step")}`
+          );
+        }
+      } else {
+        localStorage.setItem("userName", username);
+        dispatch(setStep(1));
+        navigate("/onboarding/step1");
+      }
+    } else {
+      alert("Please enter the credentials");
     }
-
-    alert("Please enter the credentials");
   };
 
   return (

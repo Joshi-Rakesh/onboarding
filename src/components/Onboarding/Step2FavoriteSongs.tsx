@@ -18,7 +18,7 @@ const Step2FavoriteSongs = () => {
       onSubmit={(values) => {
         dispatch(saveFavoriteSongs(values.songs));
         dispatch(setStep(3));
-        navigate("/onboarding");
+        navigate("/onboarding/step3");
       }}
     >
       {({ values }) => (

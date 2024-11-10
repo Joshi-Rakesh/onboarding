@@ -17,7 +17,7 @@ const Step3PaymentInfo = () => {
       onSubmit={(values) => {
         dispatch(savePaymentInfo(values));
         dispatch(setStep(4));
-        navigate("/onboarding");
+        navigate("/onboarding/step4");
       }}
     >
       {() => (
